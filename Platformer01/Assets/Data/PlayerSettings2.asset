@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlayerSettings2
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  jumpSpeed: 16
+  jumpSpeed: 12
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheckDistance: 1.5
+  startingItem: {fileID: 0}
