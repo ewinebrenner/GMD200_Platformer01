@@ -5,14 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 6.0f;
-    public float jumpSpeed = 12.0f;
-    public LayerMask groundLayer;
-    public float groundCheckDistance = 1.5f;
+    public PlayerControllerSettings settings;
+
     private Rigidbody2D _rb;
     private float _xInput;
     private bool _isJumpPressed; //Has jump been pressed this frame?
     private bool _isGrounded;//Are we on the ground?
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -27,25 +26,25 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, settings.groundCheckDistance, settings.groundLayer);
         //Did we hit something?
         if (hit.collider != null)
         {
             _isGrounded = true;
-            Debug.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance, Color.green);
+            Debug.DrawLine(transform.position, transform.position + Vector3.down * settings.groundCheckDistance, Color.green);
 
         }
         else
         {
             _isGrounded = false;
-            Debug.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance, Color.red);
+            Debug.DrawLine(transform.position, transform.position + Vector3.down * settings.groundCheckDistance, Color.red);
         }
 
-        _rb.velocity = new Vector2(_xInput * moveSpeed, _rb.velocity.y);
+        _rb.velocity = new Vector2(_xInput * settings.moveSpeed, _rb.velocity.y);
 
         if (_isJumpPressed && _isGrounded)
         {
-            _rb.velocity = new Vector2(_rb.velocity.x, jumpSpeed);
+            _rb.velocity = new Vector2(_rb.velocity.x, settings.jumpSpeed);
         }
         _isJumpPressed = false;
 
