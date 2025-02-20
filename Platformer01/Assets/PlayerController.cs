@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerControllerSettings settings;
 
+    private SpriteRenderer _sprite;
+    private Animator _animator;
     private Rigidbody2D _rb;
     private float _xInput;
     private bool _isJumpPressed; //Has jump been pressed this frame?
@@ -15,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponentInChildren<Animator>();
+        _sprite = GetComponentInChildren<SpriteRenderer>();
     }
     void Update()
     {
@@ -22,6 +26,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             _isJumpPressed = true;
+        }
+        _animator.SetBool("OnGround", _isGrounded);
+        _animator.SetFloat("MoveSpeed", Mathf.Abs(_xInput));
+
+        //_sprite.flipX = _xInput < 0;
+
+        //Flip left or right
+        //If facing left and moving right, flip
+        if (_sprite.flipX && _xInput > 0)
+        {
+            _sprite.flipX = false;
+        }
+        //If facing right and moving left, flip
+        else if (!_sprite.flipX && _xInput < 0)
+        {
+            _sprite.flipX = true;
         }
     }
     private void FixedUpdate()

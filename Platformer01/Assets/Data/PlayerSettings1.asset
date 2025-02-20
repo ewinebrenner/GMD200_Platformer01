@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d432a0ea58feae408b264f641fa31f2, type: 3}
   m_Name: PlayerSettings1
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpSpeed: 15
+  moveSpeed: 6
+  jumpSpeed: 8
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  groundCheckDistance: 1.5
+  groundCheckDistance: 0.1
   startingItem: {fileID: 11400000, guid: b7ec0424dc5a2014baab9f0a860cbb9d, type: 2}
